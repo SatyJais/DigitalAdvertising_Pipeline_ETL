@@ -1,4 +1,4 @@
-## Data Cleaning & ETL Automation using BigQuery & Sheets
+## Data Cleaning & ETL Automation using BigQuery (SQL) & Sheets
 Campaign report - data streamlining &amp; automation project 
 # Problem Statement - 
 The existing Client Campaign Data process was broken. It was prone to errors, missing data points, and too many manual steps, and it was time-consuming and inefficient. There were multiple data sources and for every report, the team needed to fetch data from various sources and create a new Excel sheet every time resulting in duplicate data, redundant efforts and errors. Bottomline - The process was missing the "Single Source of Truth"
