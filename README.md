@@ -215,7 +215,7 @@ utm_campaign = ''
 
 
 Load the sheet to a dynamic Google Sheet for analysis & reporting -
-![linking to Google Sheets](assets/Connecting _to_GSheet_2.png)
+![linking to Google Sheets](assets/Connecting_to_GSheet_2.png)
 
 
 
