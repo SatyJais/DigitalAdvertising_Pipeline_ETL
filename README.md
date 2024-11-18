@@ -1,7 +1,11 @@
 ## Data Cleaning & ETL Automation using BigQuery (SQL) & Sheets
 Campaign report - data streamlining &amp; automation project 
-# Premise -
+# Business Background -
 I was working as the account manager/ digital marketing consultant for a major telecom player in the US. The client commissioned us to run display (programmatic) and google ads (search, display, video) for their B2B division. The key KPIs for the project were - Cost per Lead, SQLs, Cost per Opportunity.
+
+** Automating workflows **
+** data integrity **
+** working with latest & most relevant data **
 
 # Problem Statement - 
 The existing Client Campaign Data process was broken. It was prone to errors, missing data points, and too many manual steps, and it was time-consuming and inefficient. There were multiple data sources and for every report, the team needed to fetch data from various sources and create a new Excel sheet every time resulting in duplicate data, redundant efforts and errors. Bottomline - The process was missing the "Single Source of Truth"
@@ -12,6 +16,8 @@ The existing Client Campaign Data process was broken. It was prone to errors, mi
 - Leads/opportunities from ** Inbound calls, chatbot, Calendly ** don’t have campaign (UTM) tags every time they come into the sheet. The client has to add the tags manually in the sheets a few times a month, but the same leads may not have any tags in the subsequent sheets
 In short, the data is not dynamically updated currently.
 
+
+
 # As a result, data discrepancies creep in. For example - 
 
 - Missing Leads -
@@ -19,6 +25,9 @@ In short, the data is not dynamically updated currently.
   - Leads (all sources) in the most recent sheet (Jan- 17 Sep 2023)  - 2978
 - Missed Opportunities -
   - ~25% error in the existing system.
+Example - Descrepancies in Data (what was reported vs actuals)-
+
+<img src="assets/Descrepenacies_in_Data.png" alt="Descrepancies in Data" style="width:30%; height:auto;">
 
 ## To fix these issues and create an error-proof unified system, automation was needed - A continuously updated & living "Source of Truth"
 _# A system where each lead is stored in a unified sheet, all previous leads are updated on the relevant attributes, and there is no data loss._
@@ -214,17 +223,36 @@ utm_campaign = ''
 ```
 
 
-Load the sheet to a dynamic Google Sheet for analysis & reporting -
+**Load the sheet to a dynamic Google Sheet for analysis & reporting -**
 ![linking to Google Sheets](assets/Connecting_to_GSheet_2.png)
 
+**Connected Sheet is ready with data -**
+![BigQuery Connected GoogleSheet](assets/Connnected_Gsheet.png)
 
 
+**Streaming Google Ads data via a Chrome extension : Coefficient -**
+![GoogleAdsDataStreaming](assets/GoogleAdsData_Coefficient.png)
 
 
 
 ## Load
 
+```
+=importrange("1xad-3kfzmFDzjxLdkrFDIm-fE_kkDYn_2tVJCe6iQFY","Extract 1!A:Y")
+```
 
 ```
 Query(MasterData_CRM_Leads!$A:$AB,"select count(A) where J contains 'google' AND Not K contains 'organic' AND B >= date'"&TEXT(B3,"yyyy-mm-dd")&"' AND (S = 'Website' OR S contains 'google') AND B <= date'"&text(C3,"yyyy-mm-dd")&"' AND Not L contains 'bi_failover_sciera_23_q3_pmax' Label count(A) 'Formfills'",1)
 ```
+
+
+
+
+## Bringing the data from both the sources to create a dymanic dashboard
+
+
+**Example visualization 1**
+<img src="assets/LiveCHart.png" style="width:30%; height:auto;">
+
+**Example Visualization 2**
+<img src="assets/Live_Table.png" style="width:30%; height:auto;">
