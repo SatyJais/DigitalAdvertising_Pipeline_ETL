@@ -1,21 +1,16 @@
 ## Data Cleaning & ETL Automation using BigQuery (SQL) & Sheets
 Campaign report - data streamlining &amp; automation project 
 # Business Background -
-I was working as the account manager/ digital marketing consultant for a major telecom player in the US. The client commissioned us to run display (programmatic) and google ads (search, display, video) for their B2B division. The key KPIs for the project were - Cost per Lead, SQLs, Cost per Opportunity.
-
-** Automating workflows **
-** data integrity **
-** working with latest & most relevant data **
+I was the account manager/ digital marketing consultant for a major telecom player in the US. The client commissioned us to run display (programmatic) and Google ads (search, display, video) for their B2B division. The key KPIs for the project were Cost per Lead, SQLs, and Cost per Opportunity.
 
 # Problem Statement - 
-The existing Client Campaign Data process was broken. It was prone to errors, missing data points, and too many manual steps, and it was time-consuming and inefficient. There were multiple data sources and for every report, the team needed to fetch data from various sources and create a new Excel sheet every time resulting in duplicate data, redundant efforts and errors. Bottomline - The process was missing the "Single Source of Truth"
+The existing Client Campaign Data workflow was broken. It was prone to errors, missing data points, and too many manual steps, and it was time-consuming and inefficient. There were multiple data sources and for every report, the team needed to fetch data from various sources and create a new Excel/Google sheet every time resulting in duplicate data, redundant efforts and errors. Bottomline - **The process was missing the "Single Source of Truth"**. And when we missed datapoints, it affected our reported metrics, showing a performance lower than actual.
 
 # Issues in the existing data management & reporting system - 
 - The leads coming in from the client were not recorded as per their LeadID or any primary key
-- The older leads are not getting updated after a point of time. Let’s say if a lead from June is disqualified in August or converts into an opportunity later, it's may not get updated in our systems
-- Leads/opportunities from ** Inbound calls, chatbot, Calendly ** don’t have campaign (UTM) tags every time they come into the sheet. The client has to add the tags manually in the sheets a few times a month, but the same leads may not have any tags in the subsequent sheets
-In short, the data is not dynamically updated currently.
-
+- The older leads were not getting updated after a period. Let’s say if a lead from June is disqualified in August or converts into an opportunity later, it may not get updated in our systems. Or if an opportunity added more lines later, there was a high chance that we would miss that update, as a result under-reporting our WINs.
+- Leads/opportunities from **Inbound calls, chatbot, Calendly** didn’t have campaign (UTM) tags every time they come into the sheets. The client has to add the tags manually in the sheets a few times a month, but the same leads may not have any tags in the subsequent sheets
+In short, the data was not dynamically updated.
 
 
 # As a result, data discrepancies creep in. For example - 
@@ -25,12 +20,19 @@ In short, the data is not dynamically updated currently.
   - Leads (all sources) in the most recent sheet (Jan- 17 Sep 2023)  - 2978
 - Missed Opportunities -
   - ~25% error in the existing system.
-Example - Descrepancies in Data (what was reported vs actuals)-
+Example - Discrepancies in Data (what was reported vs actuals)-
 
 <img src="assets/Descrepenacies_in_Data.png" alt="Descrepancies in Data" style="width:30%; height:auto;">
 
 ## To fix these issues and create an error-proof unified system, automation was needed - A continuously updated & living "Source of Truth"
 _# A system where each lead is stored in a unified sheet, all previous leads are updated on the relevant attributes, and there is no data loss._
+
+1. **Automating workflows**
+2. **data integrity**
+3. **working with latest & most relevant data**
+
+## Proposed data workflow (ETL process) - 
+
 
 ## EXTRACT
 
@@ -196,7 +198,7 @@ Lead_ID = left(N.Lead_ID,15)
  - Missing utm tag fields where Google tags are present.
 
 
-Replacing Null UTM_Tags with Google_Tags
+**Merging Two columns to avoid NULL values in the Google Tags(Source, Medium, Campaign) values**
 
 ```sql
 UPDATE
@@ -209,8 +211,7 @@ UPDATE
  utm_source Like 'google'
 ```
 
-
-Replacing Blank UTM_Campaign with Google_Campaign
+**Cleaning & Replacing Blank UTM_Campaign with Google_Campaign**
 ``` sql
 ​​update
 `dataanalytics-2023-394903.USCC_Leads_CRM_Sheets.MasterSheet`
@@ -248,7 +249,7 @@ Query(MasterData_CRM_Leads!$A:$AB,"select count(A) where J contains 'google' AND
 
 
 
-## Bringing the data from both the sources to create a dymanic dashboard
+## Bringing the data from both sources to create a dynamic dashboard
 
 
 **Example visualization 1**
