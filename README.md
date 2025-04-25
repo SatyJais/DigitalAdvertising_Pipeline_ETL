@@ -1,7 +1,7 @@
 [PORTFOLIO_HOME](https://satyjais.github.io/)
 
 
-## Data Cleaning & ETL Automation using BigQuery (SQL) & Sheets
+## Data Cleaning & ETL Automation using BigQuery (SQL) & Google Sheets
 Campaign report - data streamlining &amp; automation project 
 # Business Background -
 I was the account manager/ digital marketing consultant for a major telecom player in the US. The client commissioned us to run display (programmatic) and Google ads (search, display, video) for their B2B division. The key KPIs for the project were Cost per Lead, SQLs, and Cost per Opportunity.
