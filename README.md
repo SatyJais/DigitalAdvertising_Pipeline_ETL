@@ -1,4 +1,4 @@
-### [HOMEPAGE](https://satyjais.github.io/)
+[HOMEPAGE](https://satyjais.github.io/)
 
 
 ## Data Cleaning & ETL Automation using BigQuery (SQL) & Sheets
