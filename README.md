@@ -252,7 +252,7 @@ Query(MasterData_CRM_Leads!$A:$AB,"select count(A) where J contains 'google' AND
 
 
 
-## Bringing the data from both sources to create a dynamic dashboard
+## Bringing the data from both sources to create a real-time & dynamic dashboard
 
 
 **Example visualization 1**
